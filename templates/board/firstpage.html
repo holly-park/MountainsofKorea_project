@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<title>맛동산 홈페이지</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+
+<body>
+
+<div class="bgimg w3-display-container w3-animate-opacity w3-text-white">
+  <div class="w3-display-topleft w3-padding-large w3-xlarge w3-text-blue">
+    Matdongsan(주)
+  </div>
+  <div class="w3-display-middle">
+    <h1 class="w3-jumbo w3-animate-top">100대 명산</h1>
+    <hr class="w3-border-grey" style="margin:auto;width:40%">
+    <p class="w3-large w3-center">with 맛집</p>
+    <a href="/board/list" class="w3-btn w3-block w3-teal w3-hover-light-blue w3-round w3-medium">명산보러 가기</a>
+  </p>
+    <a href="/board/goodpricelist" class="w3-btn w3-block w3-teal w3-hover-light-blue w3-round w3-medium">맛집보러 가기</a>
+  </div>
+</div>
+
+</body>
+</html>

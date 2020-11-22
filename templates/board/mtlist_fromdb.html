@@ -1,0 +1,131 @@
+{% load static %}
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+{% comment %} <div class="container">
+    <div class="row">
+        <div class="col">
+            {% for mt_li in mt_list %}
+                <ul><a href="detail/{{ mt_li.NAME }}">. {{ mt_li.NAME }} - {{ mt_li.ADDRESS }} </a></ul>
+            {% endfor %}
+        </div>
+        <div class="col">
+            {{ mountain_map|safe }}
+        </div>
+    </div>
+</div>   {% endcomment %}
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
+</style>
+<body class="w3-light-grey">
+
+<!-- Top container -->
+<div class="w3-bar w3-top w3-black w3-large" style="z-index:4">
+  <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey" onclick="w3_open();"><i class="fa fa-bars"></i>  Menu</button>
+  <span class="w3-bar-item w3-right">MATDONGSAN</span>
+</div>
+<nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
+    <div class="w3-container w3-row">
+      <div class="w3-col s4">
+        <class="w3-circle w3-margin-right" style="width:46px">
+      </div>
+      <div class="w3-col s8 w3-bar">
+        <span>Welcome to <strong>MATDONGSAN</strong></span><br>
+        <a href="#" class="w3-bar-item w3-button"><i class="fa fa-envelope"></i></a>
+        <a href="#" class="w3-bar-item w3-button"><i class="fa fa-user"></i></a>
+        <a href="#" class="w3-bar-item w3-button"><i class="fa fa-cog"></i></a>
+      </div>
+    </div>
+    <hr>
+    <div class="w3-container">
+      <h5>100대 명산</h5>
+    </div>
+    <div class="w3-bar-block">
+      <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Close Menu</a>
+      <a href="/board/" class="w3-bar-item w3-button w3-padding"><i class="fa fa-diamond fa-fw"></i> Home</a>
+      <a href="/board/list/" class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-diamond fa-fw"></i> 100대 명산 </a>
+      {% comment %} <a href="/board/list/" class="w3-bar-item w3-button w3-padding"> &nbsp&nbsp&nbsp ㄴ 명산 상세보기 </a> {% endcomment %}
+      <a href="/board/goodpricelist/" class="w3-bar-item w3-button w3-padding"><i class="fa fa-diamond fa-fw"></i> 착한 맛집</a>
+      {% comment %} <a href="/board/list/" class="w3-bar-item w3-button w3-padding"> &nbsp&nbsp&nbsp ㄴ 맛집 상세보기 </a> {% endcomment %}
+      
+    </div>
+  </nav>
+
+<!-- Overlay effect when opening sidebar on small screens -->
+<div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay">
+</div>
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-main" style="margin-left:300px;margin-top:43px;">
+
+    <script>
+        // Get the Sidebar
+        var mySidebar = document.getElementById("mySidebar");
+        
+        // Get the DIV with overlay effect
+        var overlayBg = document.getElementById("myOverlay");
+        
+        // Toggle between showing and hiding the sidebar, and add overlay effect
+        function w3_open() {
+          if (mySidebar.style.display === 'block') {
+            mySidebar.style.display = 'none';
+            overlayBg.style.display = "none";
+          } else {
+            mySidebar.style.display = 'block';
+            overlayBg.style.display = "block";
+          }
+        }
+        
+        // Close the sidebar with the close button
+        function w3_close() {
+          mySidebar.style.display = "none";
+          overlayBg.style.display = "none";
+        }
+        </script>
+
+
+
+
+
+
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h3 style="text-align : center">&#60;&#60; 한국의 100대 명산 &#62;&#62;</h3>
+            <p></p> 
+            <table class="table table-striped">
+                <thead> <tr><th>순번</th> <th>산명</th> <th>높이</th> <th>소재지</th></tr> </thead>
+                <tbody>                                   {% comment %} 테이블 head 로 필드명 지정 {% endcomment %}
+                    {% for row in page_obj %}             {% comment %} 테이블 body 로 데이터 넣기 {% endcomment %}
+                        <tr onclick="location.href='http://127.0.0.1:8000/board/list/detail/{{row.NAME}}'" style="cursor:hand" >
+                        <td>{{row.NO}}</td><td>{{row.NAME}}</td><td>{{row.HEIGHT}} m</td><td>{{row.ADDRESS}}</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <ul class="pagination">                       {% comment %} 페이지네이션 {% endcomment %}
+                {% if page_obj.has_previous %}
+                <li class="page-item"><a class="page-link" href="?page=1">&laquo; first</a></li>
+                <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a></li>
+                {% endif %}
+                <li class="page-item active"><a class="page-link" href="#">Page {{ page_obj.number }} of
+                        {{ page_obj.paginator.num_pages }}</a></li>
+                {% if page_obj.has_next %}
+                <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a></li>
+                <li class="page-item"><a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+        <div class="col">
+            <img src="{% static 'css/100mts.jpg' %}">     {% comment %} 100대 명산 이미지 넣기 {% endcomment %}
+        </div>
+    </div>
+ </div>
